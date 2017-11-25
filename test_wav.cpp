@@ -13,10 +13,23 @@
  *        License:  GNU GPL2
  */
 
-#include "WAVE.hpp"
+#include "WAVReader.h"
 
 int main(int argc, const char *argv[])
 {
+    WAVE wav( "./kalia.wav" );
+
+    auto channelData = wav.getData( );
+    for( auto v : channelData )
+    {
+        cout << v.first << ' ';
+        for( auto vv : v.second )
+            cout << vv << ' ';
+        cout << endl;
+    }
+
+
+
     
     return 0;
 }
