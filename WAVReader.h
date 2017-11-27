@@ -50,9 +50,6 @@ class WAVE
         {
             ifstream fh;
             fh.open( filepath, fh.binary | fh.in );
-
-            cout << "Parsing file " << filepath << endl;
-
             
             /******************************************************************
              * Get the chunkID ; it is 4 byte.

@@ -22,6 +22,7 @@ using namespace std;
 int main(int argn, const char *argv[])
 {
     WAVE wav;
+    bool toFile = false;
     if( argn > 1 )
         wav.parse( argv[1] );
     else
@@ -30,24 +31,30 @@ int main(int argn, const char *argv[])
     std::streambuf * buf;
     std::ostream* fp;
 
+    ofstream outF;
     if( argn > 2 )
     {
-        ofstream outF( argv[2], std::ofstream::out );
-        buf = outF.rdbuf( );
+        outF.open( argv[2], std::ofstream::out );
+        toFile = true;
     }
-    else
-        buf = std::cout.rdbuf( );
-
     
-    std::ostream out( buf );
-
     auto channelData = wav.getData( );
     for( auto v : channelData )
     {
-        out << v.first << ' ';
-        for( auto vv : v.second )
-            cout << vv << ' ';
-        out << endl;
+        if( toFile )
+        {
+            outF << v.first << ' ';
+            for( auto vv : v.second )
+                outF << vv << ' ';
+            outF << '\n';
+        }
+        else
+        {
+            cout << v.first << ' ';
+            for( auto vv : v.second )
+                cout << vv << ' ';
+            cout << '\n';
+        }
     }
     return 0;
 }
