@@ -14,22 +14,40 @@
  */
 
 #include "WAVReader.h"
+#include <fstream>
+#include <cassert>
 
-int main(int argc, const char *argv[])
+using namespace std;
+
+int main(int argn, const char *argv[])
 {
-    WAVE wav( "./kalia.wav" );
+    WAVE wav;
+    if( argn > 1 )
+        wav.parse( argv[1] );
+    else
+        wav.parse( "./kalia.wav" );
+
+    std::streambuf * buf;
+    std::ostream* fp;
+
+    if( argn > 2 )
+    {
+        ofstream outF( argv[2], std::ofstream::out );
+        buf = outF.rdbuf( );
+    }
+    else
+        buf = std::cout.rdbuf( );
+
+    
+    std::ostream out( buf );
 
     auto channelData = wav.getData( );
     for( auto v : channelData )
     {
-        cout << v.first << ' ';
+        out << v.first << ' ';
         for( auto vv : v.second )
             cout << vv << ' ';
-        cout << endl;
+        out << endl;
     }
-
-
-
-    
     return 0;
 }
