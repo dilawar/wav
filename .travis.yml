@@ -3,5 +3,11 @@ compiler:
 - clang
 - gcc
 
+notifications:
+  email:
+    on_success: never # default: change
+    on_failure: always # default: always
+
+
 script:
     cmake . && make -j3 && ./test_wav
