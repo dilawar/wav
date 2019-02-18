@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/dilawar/wav.svg?branch=master)](https://travis-ci.org/dilawar/wav)
 # wav
 
 Header only uncompressed WAV file parser.
