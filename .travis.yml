@@ -2,3 +2,6 @@ language: cpp
 compiler:
 - clang
 - gcc
+
+script:
+    cmake . && make -j3 && ./test_wav
